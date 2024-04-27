@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -18,16 +17,20 @@ Route::get('/auth/home', function () {
 })->middleware(['auth', 'verified'])->name('auth.home');
 
 Route::get('/auth/contact', function () {
-    return Inertia::render('Contact/Index');
+    return Inertia::render('Home/Index');
 })->middleware(['auth', 'verified'])->name('auth.contact');
+
+Route::get('/about', function () {
+    return Inertia::render('About/Index');
+})->name('about');
 
 Route::get('/home', function () {
     return Inertia::render('Home/Index');
-})->middleware('guest')->name('home');
+})->name('home');
 
 Route::get('/contact', function () {
     return Inertia::render('Contact/Index');
-})->middleware('guest')->name('contact');
+})->name('contact');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
