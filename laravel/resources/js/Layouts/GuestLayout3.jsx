@@ -80,9 +80,6 @@ export default function Guest({user, header, children }) {
 
                                   <Dropdown.Content>
                                       <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
-                                      <Dropdown.Link href={route('logout')} method="post" as="button">
-                                          Log Out
-                                      </Dropdown.Link>
                                   </Dropdown.Content>
                               </Dropdown>
                           </div>
@@ -124,7 +121,13 @@ export default function Guest({user, header, children }) {
 
                   <div className="pt-2 pb-3 space-y-1">
                       <ResponsiveNavLink href={route('about')} active={route().current('about')}>
-                          About
+                          About Us
+                      </ResponsiveNavLink>
+                  </div>
+
+                  <div className="pt-2 pb-3 space-y-1">
+                      <ResponsiveNavLink href={route('contact')} active={route().current('contact')}>
+                          Contact
                       </ResponsiveNavLink>
                   </div>
 
@@ -150,13 +153,7 @@ export default function Guest({user, header, children }) {
               </header>
           )}
          <main>
-           <div className="py-12">
-               <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 flex justify-center">
-                   <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-8 w-full max-w-lg">
-                       {children}
-                   </div>
-               </div>
-           </div>
+           {children}
         </main>
       </div>
     );

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import GuestLayout from '@/Layouts/GuestLayout';
+import GuestLayout3 from '@/Layouts/GuestLayout3';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
@@ -27,10 +27,15 @@ export default function Register() {
     };
 
     return (
-        <GuestLayout>
-            <Head title="Register" />
+        <GuestLayout3
+          header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Sign Up</h2>}
+        >
+         <Head title="Register" />
 
-            <form onSubmit={submit}>
+         <div class="py-12">
+          <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+           <section class="space-y-6 bg-white shadow">
+            <form onSubmit={submit} className="p-6 bg-white shadow">
                 <div>
                     <InputLabel htmlFor="name" value="Name" />
 
@@ -38,7 +43,7 @@ export default function Register() {
                         id="name"
                         name="name"
                         value={data.name}
-                        className="mt-1 block w-full"
+                        className="mt-1 block w-3/4"
                         autoComplete="name"
                         isFocused={true}
                         onChange={(e) => setData('name', e.target.value)}
@@ -56,7 +61,7 @@ export default function Register() {
                         type="email"
                         name="email"
                         value={data.email}
-                        className="mt-1 block w-full"
+                        className="mt-1 block w-3/4"
                         autoComplete="username"
                         onChange={(e) => setData('email', e.target.value)}
                         required
@@ -73,7 +78,7 @@ export default function Register() {
                         type="password"
                         name="password"
                         value={data.password}
-                        className="mt-1 block w-full"
+                        className="mt-1 block w-3/4"
                         autoComplete="new-password"
                         onChange={(e) => setData('password', e.target.value)}
                         required
@@ -90,7 +95,7 @@ export default function Register() {
                         type="password"
                         name="password_confirmation"
                         value={data.password_confirmation}
-                        className="mt-1 block w-full"
+                        className="mt-1 block w-3/4"
                         autoComplete="new-password"
                         onChange={(e) => setData('password_confirmation', e.target.value)}
                         required
@@ -99,7 +104,7 @@ export default function Register() {
                     <InputError message={errors.password_confirmation} className="mt-2" />
                 </div>
 
-                <div className="flex items-center justify-end mt-4">
+                <div className="flex items-center justify-start mt-4">
                     <Link
                         href={route('login')}
                         className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -112,6 +117,9 @@ export default function Register() {
                     </PrimaryButton>
                 </div>
             </form>
-        </GuestLayout>
+          </section>
+         </div>
+        </div>
+      </GuestLayout3>
     );
 }

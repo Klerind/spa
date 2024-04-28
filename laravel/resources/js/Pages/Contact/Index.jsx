@@ -11,13 +11,10 @@ export default function Index({ auth }) {
           user={auth.user}
           header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Contact</h2>}
       >
-        <Head title="Home" />
-
+       <Head title="Contact" />
         <div className="py-12">
           <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-               contact
-            <SendEmailForm className="max-w-xl" />
-
+            <SendEmailForm />
           </div>
         </div>
       </AuthenticatedLayout>
@@ -25,7 +22,12 @@ export default function Index({ auth }) {
       <GuestLayout3
          header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Contact</h2>}
        >
-        <SendEmailForm />
+        <Head title="Contact" />
+        <div className="py-12">
+         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+          <SendEmailForm />
+        </div>
+       </div>
       </GuestLayout3>
     );
 }
