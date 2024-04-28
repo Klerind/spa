@@ -38,12 +38,9 @@ export default function Index({ auth }) {
           header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Home</h2>}
       >
         <Head title="Home" />
-
         <div className="py-12">
-          <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+          <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6 bg-white shadow">
                Home
-            <UpdatePasswordForm className="max-w-xl" />
-
           </div>
         </div>
       </AuthenticatedLayout>
@@ -52,7 +49,11 @@ export default function Index({ auth }) {
          header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Home</h2>}
        >
       <Head title="Home" />
-        Home
+      <div className="py-12">
+        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6 bg-white shadow">
+             Home
+        </div>
+      </div>
       </GuestLayout3>
     );
 }

@@ -27,31 +27,17 @@ export default function Login({ auth, status, canResetPassword }) {
     };
 
     return (
-
-      auth.user ?
-        <AuthenticatedLayout
-          user={auth.user}
-          header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Contact</h2>}
-      >
-        <Head title="Contact" />
-
-        <div className="py-12">
-          <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-               Contact
-               {auth.user ? console.log('auth has') : console.log('no auth') }
-            <UpdatePasswordForm className="max-w-xl" />
-
-          </div>
-        </div>
-      </AuthenticatedLayout>
-      :
-        <GuestLayout3>
+        <GuestLayout3
+          header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Log in</h2>}
+          >
             <Head title="Log in" />
 
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
 
+          <div className="py-12">
+           <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6 bg-white shadow">
             <form onSubmit={submit}>
-                <div>
+                <div class="pt-4 mt-4">
                     <InputLabel htmlFor="email" value="Email" />
 
                     <TextInput
@@ -59,7 +45,7 @@ export default function Login({ auth, status, canResetPassword }) {
                         type="email"
                         name="email"
                         value={data.email}
-                        className="mt-1 block w-full"
+                        className="mt-1 block w-3/4"
                         autoComplete="username"
                         isFocused={true}
                         onChange={(e) => setData('email', e.target.value)}
@@ -76,7 +62,7 @@ export default function Login({ auth, status, canResetPassword }) {
                         type="password"
                         name="password"
                         value={data.password}
-                        className="mt-1 block w-full"
+                        className="mt-1 block w-3/4"
                         autoComplete="current-password"
                         onChange={(e) => setData('password', e.target.value)}
                     />
@@ -95,7 +81,7 @@ export default function Login({ auth, status, canResetPassword }) {
                     </label>
                 </div>
 
-                <div className="flex items-center justify-end mt-4">
+                <div className="flex items-center justify-start mt-4">
                     {canResetPassword && (
                         <Link
                             href={route('password.request')}
@@ -110,6 +96,8 @@ export default function Login({ auth, status, canResetPassword }) {
                     </PrimaryButton>
                 </div>
             </form>
+           </div>
+          </div>
         </GuestLayout3>
     );
 }

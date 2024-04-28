@@ -45,12 +45,12 @@ export default function SendEmailForm({ className = '' }) {
 
     const closeModal = () => {
         setConfirmingUserDeletion(false);
-         put(route('test.sendData'))
+        put(route('test.sendData'))
         reset();
     };
 
     return (
-        <section className={`space-y-6 ${className}`}>
+        <section className={`space-y-6 bg-white shadow${className}`}>
             <form className="p-6">
               <div className="mt-6">
                   <InputLabel htmlFor="email" value="Email:" />

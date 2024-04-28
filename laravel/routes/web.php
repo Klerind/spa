@@ -8,9 +8,9 @@ Route::get('/', function () {
     return Inertia::render('Home/Index');
 })->middleware('guest')->name('home');
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/profile', function () {
+    return Inertia::render('profile.edit');
+})->middleware(['auth', 'verified'])->name('profile.edit');
 
 Route::get('/auth/home', function () {
     return Inertia::render('Home/Index');
