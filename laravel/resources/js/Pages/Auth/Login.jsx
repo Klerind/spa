@@ -35,7 +35,7 @@ export default function Login({ auth, status, canResetPassword }) {
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
 
           <div className="py-12">
-           <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6 bg-white shadow">
+           <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6 bg-white dark:bg-black shadow">
             <form onSubmit={submit}>
                 <div class="pt-4 mt-4">
                     <InputLabel htmlFor="email" value="Email" />

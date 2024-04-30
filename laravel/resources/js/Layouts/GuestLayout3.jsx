@@ -139,7 +139,7 @@ export default function Guest({user, header, children }) {
 
                       <div className="mt-3 space-y-1">
                           <ResponsiveNavLink href={route('login')}>Log In</ResponsiveNavLink>
-                          <ResponsiveNavLink method="post" href={route('register')} as="button">
+                          <ResponsiveNavLink href={route('register')}>
                               Sign up
                           </ResponsiveNavLink>
                       </div>
