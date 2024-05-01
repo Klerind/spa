@@ -12,8 +12,7 @@ class EmailController extends Controller
   public function sendMail(Request $request): Response
   { //dd($request);
 
-      Mail::to('klerindtervoli@klerindtervoli.online')->send(new SendMail($request));
-      return response('Hello World', 200)
-                  ->header('Content-Type', 'text/plain');;
+      Mail::to('klerindtervoli@klerindtervoli.tech')->send(new SendMail($request));
+      return response('Hello World', 200);
   }
 }
