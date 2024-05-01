@@ -28,7 +28,7 @@ class SendMail extends Mailable
     {
         return new Envelope(
             subject: 'Send Mail',
-            replyTo: ['Taylor Otwell'],
+            replyTo: ['TaylorOtwell@email.com'],
         );
     }
 
