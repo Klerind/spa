@@ -16,9 +16,11 @@ class SendMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(
+      public $request,
+    )
     {
-        //
+      //dd($this->request->subject);
     }
 
     /**
@@ -27,8 +29,8 @@ class SendMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Send Mail',
-            replyTo: ['TaylorOtwell@email.com'],
+            subject: $this->request->subject,
+            replyTo: [$this->request->email],
         );
     }
 
