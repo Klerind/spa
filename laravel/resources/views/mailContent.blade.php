@@ -16,5 +16,6 @@
     </head>
     <body class="font-sans antialiased mode-dark">
         mail content
+        <?php echo $request->message; ?>
     </body>
 </html>
