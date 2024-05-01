@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\EmailController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -31,6 +32,8 @@ Route::get('/home', function () {
 Route::get('/contact', function () {
     return Inertia::render('Contact/Index');
 })->name('contact');
+
+Route::put('email', [EmailController::class, 'sendMail'])->name('email.sendEmailData');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

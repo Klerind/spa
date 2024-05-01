@@ -45,7 +45,7 @@ export default function SendEmailForm({ className = '' }) {
 
     const closeModal = () => {
         setConfirmingUserDeletion(false);
-        put(route('test.sendData'))
+        put(route('email.sendEmailData'))
         reset();
     };
 
@@ -95,7 +95,7 @@ export default function SendEmailForm({ className = '' }) {
                       name="message"
                       ref={messageInput}
                       value={data.message}
-                      onChange={(e) => setData('Message', e.target.value)}
+                      onChange={(e) => setData('message', e.target.value)}
                       className="mt-1 block w-3/4"
                       isFocused
                       placeholder="Message"
