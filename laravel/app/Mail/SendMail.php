@@ -41,6 +41,9 @@ class SendMail extends Mailable
     {
         return new Content(
             view: 'mailContent',
+            with: [
+                   'message' => $this->request->message,
+                  ],
         );
     }
 

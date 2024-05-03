@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EmailController;
+use App\Http\Controllers\WidgetController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -34,6 +35,8 @@ Route::get('/contact', function () {
 })->name('contact');
 
 Route::put('email', [EmailController::class, 'sendMail'])->name('email.sendEmailData');
+
+Route::put('widget', [WidgetController::class, 'create'])->name('widget.sendwidgetName');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

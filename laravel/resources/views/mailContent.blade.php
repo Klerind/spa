@@ -14,7 +14,7 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     </head>
-    <body class="font-sans antialiased mode-dark"> 
-        <?php echo $request->message; ?>
+    <body class="font-sans antialiased mode-dark">
+        <?php echo $message; ?>
     </body>
 </html>

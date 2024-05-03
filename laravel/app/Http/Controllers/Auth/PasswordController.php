@@ -15,7 +15,7 @@ class PasswordController extends Controller
      */
     public function update(Request $request): RedirectResponse
     {
-      dd($request);
+      //dd($request);
         $validated = $request->validate([
             'current_password' => ['required', 'current_password'],
             'password' => ['required', Password::defaults(), 'confirmed'],
@@ -30,7 +30,7 @@ class PasswordController extends Controller
 
     public function test(Request $request): RedirectResponse
     {
-      dd($request);
+      //dd($request);
         $validated = $request->validate([
             'current_password' => ['required', 'current_password'],
             'password' => ['required', Password::defaults(), 'confirmed'],
