@@ -11,6 +11,7 @@ class WidgetController extends Controller
 {
   public function create(Request $request): InertiaResponse
   {
+    dd($request);
     //$requests = $request->input();
     $request->validate([
       'widget' => 'required|string|max:255',]);
@@ -18,7 +19,7 @@ class WidgetController extends Controller
     $check_if_widget_exists = Widget::where([
       'name' => $request->widget
     ])->get()->first();
-    
+
     if (!is_null($check_if_widget_exists))
     {
       Widget::create([

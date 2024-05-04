@@ -6,11 +6,14 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useForm } from '@inertiajs/react';
+import BasicSelect from '../../../Components/BasicSelect';
+import FormDialog from '../../../Components/FormDialog';
 
-export default function FormDialog() {
+export default function CreateWidget() {
   const [open, setOpen] = React.useState(false);
-
+  const [type, setType] = React.useState('');
   const widgetInput = React.useRef();
+  const fieldInput = React.useRef();
 
   const {
       data,
@@ -22,6 +25,7 @@ export default function FormDialog() {
       errors,
   } = useForm({
       widget: '',
+      field: '',
   });
 
   const handleClickOpen = () => {
@@ -32,6 +36,21 @@ export default function FormDialog() {
     setOpen(false);
   };
 
+  const addField = () => {
+    data.type = type
+  };
+
+  const types = [
+    {'id': 123,
+    'type': 'text'},
+    {'id': 456,
+    'type': 'number'},
+    {'id': 789,
+    'type': 'email'}
+  ]
+
+   const types3 = put(route('api.types'))
+   console.log(types3);
   return (
     <React.Fragment>
       <Button variant="outlined" onClick={handleClickOpen}>
@@ -42,7 +61,7 @@ export default function FormDialog() {
         onClose={handleClose}
         PaperProps={{
           component: 'form',
-          onSubmit: (event) => {
+           onSubmit: (event) => {
             event.preventDefault();
             console.log(data.widget);
             put(route('widget.sendwidgetName'))
@@ -66,6 +85,22 @@ export default function FormDialog() {
             fullWidth
             variant="standard"
           />
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="field"
+            name="field"
+            label="Field name"
+            type="text"
+            ref={fieldInput}
+            value={data.field}
+            onChange={(e) => setData('field', e.target.value)}
+            fullWidth
+            variant="standard"
+          />
+          <BasicSelect menuItems={types} type={type} setType={setType} />
+          <Button onClick={addField} className="mt-6 flex justify-end">Add Field3</Button>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>

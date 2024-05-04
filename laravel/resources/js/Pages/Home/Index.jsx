@@ -10,6 +10,7 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
+import Dropdown from '@/Components/Dropdown';
 
 export default function Index({ auth }) {
 
@@ -51,7 +52,12 @@ export default function Index({ auth }) {
       <Head title="Home" />
       <div className="py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6 bg-white shadow">
-             Home
+             <Dropdown>
+               <Dropdown.Trigger>trigger</Dropdown.Trigger>
+               <Dropdown.Content>
+                 <Dropdown.Link href='/login'>link</Dropdown.Link>
+               </Dropdown.Content>
+             </Dropdown>
         </div>
       </div>
       </GuestLayout3>
