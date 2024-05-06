@@ -8,10 +8,14 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { useForm } from '@inertiajs/react';
 import BasicSelect from '../../../Components/BasicSelect';
 import FormDialog from '../../../Components/FormDialog';
+import { router } from '@inertiajs/react'
+import { createElement } from 'react';
 
-export default function CreateWidget() {
+export default function CreateWidget({ fieldsType }) {
+
   const [open, setOpen] = React.useState(false);
   const [type, setType] = React.useState('');
+
   const widgetInput = React.useRef();
   const fieldInput = React.useRef();
 
@@ -36,21 +40,30 @@ export default function CreateWidget() {
     setOpen(false);
   };
 
+  data.elements = []
+
   const addField = () => {
     data.type = type
+    console.log(data);
+
+    let el = createElement(
+   'div',
+    null,
+    createElement(
+     'label', null, fieldInput),
+     createElement(
+      'input', null, type)
+    );
+
+    data.elements.push(el)
+    console.log(data);
   };
+   let ele = null
+  {ele = data.elements.map((element) => <div>{element}</div>)}
 
-  const types = [
-    {'id': 123,
-    'type': 'text'},
-    {'id': 456,
-    'type': 'number'},
-    {'id': 789,
-    'type': 'email'}
-  ]
+   //const types3 = put(route('api.types'))
+   //const types3 = router.get('api/types')
 
-   const types3 = put(route('api.types'))
-   console.log(types3);
   return (
     <React.Fragment>
       <Button variant="outlined" onClick={handleClickOpen}>
@@ -99,8 +112,11 @@ export default function CreateWidget() {
             fullWidth
             variant="standard"
           />
-          <BasicSelect menuItems={types} type={type} setType={setType} />
-          <Button onClick={addField} className="mt-6 flex justify-end">Add Field3</Button>
+          <BasicSelect menuItems={fieldsType} type={type} setType={setType} />
+          <Button onClick={addField} className="mt-6 flex justify-end">Add Field</Button>
+          <input type="checkbox" name="picture" value="1" />
+          <label>picture</label><a onclick="deleteField(event)" href="#">Delete</a>
+          {ele}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>

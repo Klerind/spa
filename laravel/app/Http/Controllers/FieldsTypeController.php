@@ -4,14 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\FieldsType;
-use Inertia\Response as InertiaResponse;
+use Inertia\Response;
 use Inertia\Inertia;
 
 class FieldsTypeController extends Controller
 {
-  public function show()
+  public static function show()
   {
-    //return Inertia::render('Auth/Register');
+    //$all = FieldsType::all();
+     // Inertia::render('Profile/Edit',['event' => $all]);
     //dd(FieldsType::all());
    return FieldsType::all();
   }

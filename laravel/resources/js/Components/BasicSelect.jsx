@@ -11,7 +11,7 @@ export default function BasicSelect({menuItems, type, setType}) {
     setType(event.target.value);
   };
 
-const typesList = menuItems.map((menuItem) => <MenuItem value={menuItem.id}>{menuItem.type}</MenuItem>)
+const typesList = menuItems.map((menuItem) => <MenuItem value={menuItem.field_type_id}>{menuItem.type}</MenuItem>)
 
   return (
     <Box sx={{ minWidth: 120 }}>
@@ -24,9 +24,6 @@ const typesList = menuItems.map((menuItem) => <MenuItem value={menuItem.id}>{men
           label="Age"
           onChange={handleChange}
         > {typesList}
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
         </Select>
       </FormControl>
     </Box>
