@@ -10,11 +10,14 @@ import BasicSelect from '../../../Components/BasicSelect';
 import FormDialog from '../../../Components/FormDialog';
 import { router } from '@inertiajs/react'
 import { createElement } from 'react';
+import { createRoot } from 'react-dom/client';
 
 export default function CreateWidget({ fieldsType }) {
 
   const [open, setOpen] = React.useState(false);
   const [type, setType] = React.useState('');
+  const [ele, setEle] = React.useState(null);
+  const [elements, setElements] = React.useState(null);
 
   const widgetInput = React.useRef();
   const fieldInput = React.useRef();
@@ -40,27 +43,24 @@ export default function CreateWidget({ fieldsType }) {
     setOpen(false);
   };
 
-  data.elements = []
-
   const addField = () => {
     data.type = type
-    console.log(data);
-
     let el = createElement(
    'div',
     null,
     createElement(
-     'label', null, fieldInput),
-     createElement(
-      'input', null, type)
+     'label', null, 'label'),
     );
 
-    data.elements.push(el)
-    console.log(data);
-  };
-   let ele = null
-  {ele = data.elements.map((element) => <div>{element}</div>)}
+     ele.push(el)
 
+     let renEle = ele.map((element) => element)
+     console.log(renEle)
+     setElements(renEle)
+  };
+
+
+  //const root = createRoot(document.getElementById('root'));
    //const types3 = put(route('api.types'))
    //const types3 = router.get('api/types')
 
@@ -115,8 +115,9 @@ export default function CreateWidget({ fieldsType }) {
           <BasicSelect menuItems={fieldsType} type={type} setType={setType} />
           <Button onClick={addField} className="mt-6 flex justify-end">Add Field</Button>
           <input type="checkbox" name="picture" value="1" />
-          <label>picture</label><a onclick="deleteField(event)" href="#">Delete</a>
-          {ele}
+          <label>picture</label>
+          <a onclick="deleteField(event)" href="#">Delete</a>
+           {elements}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
