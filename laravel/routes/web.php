@@ -2,6 +2,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\WidgetController;
+use App\Http\Controllers\PostsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -26,9 +27,7 @@ Route::get('/about', function () {
     return Inertia::render('About/Index');
 })->name('about');
 
-Route::get('/home', function () {
-    return Inertia::render('Home/Index');
-})->name('home');
+Route::get('/home', [PostsController::class, 'show'])->name('home');
 
 Route::get('/contact', function () {
     return Inertia::render('Contact/Index');

@@ -2,6 +2,7 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
+import InputError from '@/Components/InputError';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -59,7 +60,7 @@ export default function ShowPostForm() {
            onSubmit: (event) => {
             event.preventDefault();
             console.log(data);
-          //  put(route('widget.sendwidgetName'))
+            put(route('api.post.create'))
             handleClose();
           },
         }}
@@ -68,7 +69,6 @@ export default function ShowPostForm() {
         <DialogContent>
           <TextField
             autoFocus
-            required
             margin="dense"
             id="title"
             name="title"
@@ -80,8 +80,8 @@ export default function ShowPostForm() {
             fullWidth
             variant="standard"
           />
+          <InputError message={errors.title} className="mt-2" />
           <TextField
-            required
             margin="dense"
             id="description"
             name="description"
@@ -93,11 +93,13 @@ export default function ShowPostForm() {
             fullWidth
             variant="standard"
           />
+          <InputError message={errors.description} className="mt-2" />
           <InputFileUpload
             inputRef={imageInput}
             value={data.image}
-            onChange={(e) => setData('image', e.target.value)}
+            onChange={(e) => {setData('image', e.target.value); console.log(e.target);}}
            />
+           <InputError message={errors.image} className="mt-2" />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>

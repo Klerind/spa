@@ -12,7 +12,7 @@ import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
 import Dropdown from '@/Components/Dropdown';
 
-export default function Index({ auth }) {
+export default function Index({ auth, posts }) {
 
   const { data, setData, post, processing, errors, reset } = useForm({
       email: '',
@@ -32,6 +32,13 @@ export default function Index({ auth }) {
       post(route('login'));
   };
 
+   const allposts = posts.map((post) =>
+     <div>
+      <h3>{post.post_name}</h3>
+      <p>{post.post_description}</p>
+      <time>created_at: {post.created_at}</time>
+     </div>)
+
     return (
       auth.user ?
         <AuthenticatedLayout
@@ -41,7 +48,7 @@ export default function Index({ auth }) {
         <Head title="Home" />
         <div className="py-12">
           <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6 bg-white shadow">
-               Home
+            {allposts && allposts}
           </div>
         </div>
       </AuthenticatedLayout>
