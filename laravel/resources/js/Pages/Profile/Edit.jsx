@@ -3,7 +3,10 @@ import DeleteUserForm from './Partials/DeleteUserForm';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm';
 import CreateWidget from './Partials/CreateWidget';
+import ShowPostForm from './Partials/ShowPostForm';
+import ShowProductForm from './Partials/ShowProductForm';
 import { Head } from '@inertiajs/react';
+import Button from '@mui/material/Button';
 
 export default function Edit({ auth, mustVerifyEmail, status, fieldsType }) {
     return (
@@ -17,6 +20,8 @@ export default function Edit({ auth, mustVerifyEmail, status, fieldsType }) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
                     <div className="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                         <CreateWidget fieldsType={fieldsType} />
+                        <ShowPostForm />
+                        <ShowProductForm />
                         <UpdateProfileInformationForm
                             mustVerifyEmail={mustVerifyEmail}
                             status={status}
