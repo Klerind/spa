@@ -107,8 +107,8 @@ export default function ShowProductForm() {
           <InputFileUpload
             inputRef={imageInput}
             value={data.image}
-            onChange={(e) => {setData('image', e.target.value)
-          console.log(e)}}
+            onChange={(e) => {setData('image', e.target.files[0])
+          console.log(e.target)}}
            />
         </DialogContent>
         <DialogActions>

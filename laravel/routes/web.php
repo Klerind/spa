@@ -6,10 +6,8 @@ use App\Http\Controllers\PostsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
-Route::get('/', function () {
-    return Inertia::render('Home/Index');
-})->middleware('guest')->name('home');
+ 
+Route::get('/', [PostsController::class, 'show'])->name('home');
 
 Route::get('/profile', function () {
     return Inertia::render('profile.edit');

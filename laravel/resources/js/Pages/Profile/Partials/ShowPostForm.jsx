@@ -60,8 +60,27 @@ export default function ShowPostForm() {
            onSubmit: (event) => {
             event.preventDefault();
             console.log(data);
-            put(route('api.post.create'))
-            handleClose();
+            const formData = new FormData()
+             formData.append('file', data.image)
+            //put(route('api.post.create'))
+            router.post('/api/post/create', data)
+             const fetchApi = async (data) => {
+             console.log(data);
+             const formData = new FormData()
+             formData.append('file', data)
+             try {
+              const response = await fetch('api/post/create', {
+                method: 'POST',
+                body: formData
+                })
+               const responseData = await response.json()
+               console.log(responseData)
+              } catch (error) {
+               console.error('Error:', error)
+              }
+            }
+            //fetchApi(data)
+            handleClose()
           },
         }}
       >
@@ -97,7 +116,7 @@ export default function ShowPostForm() {
           <InputFileUpload
             inputRef={imageInput}
             value={data.image}
-            onChange={(e) => {setData('image', e.target.value); console.log(e.target);}}
+            onChange={(e) => {setData('image', e.target.files[0]); console.log(e.target.files[0]);}}
            />
            <InputError message={errors.image} className="mt-2" />
         </DialogContent>
