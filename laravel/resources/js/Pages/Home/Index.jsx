@@ -34,7 +34,7 @@ export default function Index({ auth, posts }) {
 console.log(posts);
    const allposts = posts.map((post) =>
      <div>
-      <img src={"/uploads/"+post.post_image+" "}  />
+      <img src={post.post_image}  />
       <h3>{post.post_name}</h3>
       <p>{post.post_description}</p>
       <time>created_at: {post.created_at}</time>

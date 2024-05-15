@@ -26,7 +26,7 @@ class PostsController extends Controller
         $file->storeAs('uploads', $fileName);
       }
       //Storage::setVisibility('98807575_1136924723335015_3301025062416547840_o.jpg', 'public');
-      Storage::disk('local')->put($file, 'Contents');
+      //Storage::disk('local')->put($file, 'Contents');
 
       Posts::create([
         'post_name' => $request->title,
@@ -45,10 +45,17 @@ class PostsController extends Controller
 
    public function show(): InertiaResponse
    {
-    //  echo '<img src="'.asset('/storage/index.jpeg').'" />';
-    //  dd(9);
+     $posts = Posts::orderBy('created_at', 'desc')->get();
+
+     foreach ($posts as $post)
+     {
+       $post->post_image = asset('uploads/'.$post->post_image);
+     }
+
+
+      //dd($url);
      return Inertia::render('Home/Index', [
-         'posts' => Posts::orderBy('created_at', 'desc')->get(),
+         'posts' => $posts,
          'status' => session('status'),
      ]);
 
