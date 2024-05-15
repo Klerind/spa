@@ -48,7 +48,7 @@ class PostsController extends Controller
     //  echo '<img src="'.asset('/storage/index.jpeg').'" />';
     //  dd(9);
      return Inertia::render('Home/Index', [
-         'posts' => Posts::all(),
+         'posts' => Posts::orderBy('created_at', 'desc')->get(),
          'status' => session('status'),
      ]);
 
