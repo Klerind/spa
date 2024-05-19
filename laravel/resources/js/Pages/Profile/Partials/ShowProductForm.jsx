@@ -1,24 +1,28 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import InputError from '@/Components/InputError';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { useForm } from '@inertiajs/react';
+import { useForm, usePage } from '@inertiajs/react';
 import FormDialog from '../../../Components/FormDialog';
 import TextInput from '../../../Components/TextInput';
 import InputLabel from '../../../Components/InputLabel';
 import InputFileUpload from '../../../Components/InputFileUpload';
-import { router } from '@inertiajs/react'
+import ResponsiveDialog from '../../../Components/ResponsiveDialog';
 import { createElement } from 'react';
 import { createRoot } from 'react-dom/client';
 
-export default function ShowProductForm() {
+export default function ShowProductForm({ status }) {
+
+  const productErrors = usePage().props.errors;
 
   const [open, setOpen] = React.useState(false);
+  const [openErrors, setOpenErrors] = React.useState(false);
 
-  const nameInput = React.useRef();
+  const titleInput = React.useRef();
   const descriptionInput = React.useRef();
   const priceInput = React.useRef();
   const imageInput = React.useRef();
@@ -26,13 +30,13 @@ export default function ShowProductForm() {
   const {
       data,
       setData,
-      put,
+      post,
       delete: destroy,
+      errors,
       processing,
       reset,
-      errors,
   } = useForm({
-      name: '',
+      title: '',
       description: '',
       price: '',
       image: '',
@@ -45,9 +49,6 @@ export default function ShowProductForm() {
   const handleClose = () => {
     setOpen(false);
   };
-  //const root = createRoot(document.getElementById('root'));
-   //const types3 = put(route('api.types'))
-   //const types3 = router.get('api/types')
 
   return (
     <React.Fragment>
@@ -60,10 +61,14 @@ export default function ShowProductForm() {
         PaperProps={{
           component: 'form',
            onSubmit: (event) => {
-            event.preventDefault();
-            console.log(data);
-            //put(route('widget.sendwidgetName'))
-            handleClose();
+            event.preventDefault()
+            post('api/product/create')
+            if (Object.keys(errors).length === 0)
+            {
+              handleClose()
+              reset()
+            }
+            setOpenErrors(true)
           },
         }}
       >
@@ -71,20 +76,19 @@ export default function ShowProductForm() {
         <DialogContent>
           <TextField
             autoFocus
-            required
             margin="dense"
-            id="name"
-            name="name"
+            id="title"
+            name="title"
             label="Product Name"
             type="text"
-            ref={nameInput}
-            value={data.name}
-            onChange={(e) => setData('name', e.target.value)}
+            ref={titleInput}
+            value={data.title}
+            onChange={(e) => setData('title', e.target.value)}
             fullWidth
             variant="standard"
           />
+          <InputError message={errors.title} className="mt-2" />
           <TextField
-            required
             margin="dense"
             id="description"
             name="description"
@@ -96,26 +100,33 @@ export default function ShowProductForm() {
             fullWidth
             variant="standard"
           />
+          <InputError message={errors.description} className="mt-2" />
           <InputLabel value='Product Price' />
           <TextInput
             type='number'
             ref={priceInput}
             value={data.price}
-            onChange={(e) => {setData('price', e.target.value)
-          console.log(e)}}
+            onChange={(e) => {setData('price', e.target.value)}}
            />
+          <InputError message={errors.price} className="mt-2" />
           <InputFileUpload
             inputRef={imageInput}
             value={data.image}
-            onChange={(e) => {setData('image', e.target.files[0])
-          console.log(e.target)}}
+            onChange={(e) => {setData('image', e.target.files[0])}}
            />
+          <InputError message={errors.image} className="mt-2" />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
           <Button type="submit">Add Product</Button>
         </DialogActions>
       </Dialog>
+      {errors && <ResponsiveDialog
+                                 openErrors={openErrors}
+                                 setOpenErrors={setOpenErrors}
+                                 status={status}
+                                 errors={errors}
+                                />}
     </React.Fragment>
   );
 }

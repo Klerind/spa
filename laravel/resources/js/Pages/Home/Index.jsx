@@ -12,7 +12,7 @@ import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
 import Dropdown from '@/Components/Dropdown';
 
-export default function Index({ auth, posts }) {
+export default function Index({ auth, posts, products}) {
 
   const { data, setData, post, processing, errors, reset } = useForm({
       email: '',
@@ -27,17 +27,25 @@ export default function Index({ auth, posts }) {
   }, []);
 
   const submit = (e) => {
-      e.preventDefault();
-
+      e.preventDefault()
       post(route('login'));
   };
 console.log(posts);
    const allposts = posts.map((post) =>
      <div>
       <img src={post.post_image}  />
-      <h3>{post.post_name}</h3>
-      <p>{post.post_description}</p>
-      <time>created_at: {post.created_at}</time>
+      <h3>Name: {post.post_name}</h3>
+      <p>Description: {post.post_description}</p>
+      <time>Created_at: {post.created_at}</time>
+     </div>)
+
+   const allproducts = products.map((product) =>
+     <div>
+      <img src={product.product_image}  />
+      <h3>Name: {product.product_name}</h3>
+      <p>Description: {product.product_description}</p>
+      <number>Price: {product.product_price}</number><hr />
+      <time>Created_at: {product.created_at}</time>
      </div>)
 
     return (
@@ -48,8 +56,19 @@ console.log(posts);
       >
         <Head title="Home" />
         <div className="py-12">
-          <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6 bg-white shadow">
-            {allposts && allposts}
+          <div className="flex flex-row max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6 bg-white shadow">
+            <div className="w-full">
+             <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+               All Posts
+             </h2>
+             {allposts && allposts}
+            </div>
+            <div className="w-full">
+             <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+               All Products
+             </h2>
+             {allproducts && allproducts}
+           </div>
           </div>
         </div>
       </AuthenticatedLayout>

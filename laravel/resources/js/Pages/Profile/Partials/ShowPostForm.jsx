@@ -6,16 +6,19 @@ import InputError from '@/Components/InputError';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { useForm } from '@inertiajs/react';
+import { useForm, usePage } from '@inertiajs/react';
 import FormDialog from '../../../Components/FormDialog';
 import InputFileUpload from '../../../Components/InputFileUpload';
-import { router } from '@inertiajs/react'
+import ResponsiveDialog from '../../../Components/ResponsiveDialog';
 import { createElement } from 'react';
 import { createRoot } from 'react-dom/client';
 
-export default function ShowPostForm() {
+export default function ShowPostForm({ status }) {
+
+  const postErrors = usePage().props.errors;
 
   const [open, setOpen] = React.useState(false);
+  const [openErrors, setOpenErrors] = React.useState(false);
 
   const titleInput = React.useRef();
   const descriptionInput = React.useRef();
@@ -24,11 +27,11 @@ export default function ShowPostForm() {
   const {
       data,
       setData,
-      put,
+      post,
       delete: destroy,
+      errors,
       processing,
       reset,
-      errors,
   } = useForm({
       title: '',
       description: '',
@@ -40,12 +43,8 @@ export default function ShowPostForm() {
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setOpen(false)
   };
-
-  //const root = createRoot(document.getElementById('root'));
-   //const types3 = put(route('api.types'))
-   //const types3 = router.get('api/types')
 
   return (
     <React.Fragment>
@@ -58,29 +57,14 @@ export default function ShowPostForm() {
         PaperProps={{
           component: 'form',
            onSubmit: (event) => {
-            event.preventDefault();
-            console.log(data);
-            const formData = new FormData()
-             formData.append('file', data.image)
-            //put(route('api.post.create'))
-            router.post('/api/post/create', data)
-             const fetchApi = async (data) => {
-             console.log(data);
-             const formData = new FormData()
-             formData.append('file', data)
-             try {
-              const response = await fetch('api/post/create', {
-                method: 'POST',
-                body: formData
-                })
-               const responseData = await response.json()
-               console.log(responseData)
-              } catch (error) {
-               console.error('Error:', error)
-              }
+            event.preventDefault()
+            post('api/post/create')
+            if (Object.keys(errors).length === 0)
+            {
+              handleClose()
+              reset()
             }
-            //fetchApi(data)
-            handleClose()
+            setOpenErrors(true)
           },
         }}
       >
@@ -116,7 +100,7 @@ export default function ShowPostForm() {
           <InputFileUpload
             inputRef={imageInput}
             value={data.image}
-            onChange={(e) => {setData('image', e.target.files[0]); console.log(e.target.files[0]);}}
+            onChange={(e) => {setData('image', e.target.files[0])}}
            />
            <InputError message={errors.image} className="mt-2" />
         </DialogContent>
@@ -125,6 +109,12 @@ export default function ShowPostForm() {
           <Button type="submit">Add Post</Button>
         </DialogActions>
       </Dialog>
+      {errors && <ResponsiveDialog
+                                 openErrors={openErrors}
+                                 setOpenErrors={setOpenErrors}
+                                 status={status}
+                                 errors={errors}
+                                />}
     </React.Fragment>
   );
 }
